@@ -28,6 +28,15 @@ void deepCopy(binaryTreeNode<myType>*& root, binaryTreeNode<myType>*& copyRoot)
 }
 
 template <class myType>
+int countNodes(binaryTreeNode<myType> *root)
+{
+    if (root == NULL)
+        return 0;
+    
+    return countNodes(tree->left) + countNodes(tree->right);
+}
+
+template <class myType>
 void preorder(binaryTreeNode<myType> *root)
 {
     if (root == NULL)
