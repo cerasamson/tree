@@ -9,6 +9,7 @@ struct binaryTreeNode
     binaryTreeNode<type> *left, *right;
 };
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 template <class myType>
 void deepCopy(binaryTreeNode<myType>*& root, binaryTreeNode<myType>*& copyRoot)
 {
@@ -23,10 +24,10 @@ void deepCopy(binaryTreeNode<myType>*& root, binaryTreeNode<myType>*& copyRoot)
         deepCopy(root1->left, root2->left);
         deepCopy(root1->right, root2->right);
     }
-    
     return;
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 template <class myType>
 int countNodes(binaryTreeNode<myType> *root)
 {
@@ -36,6 +37,7 @@ int countNodes(binaryTreeNode<myType> *root)
     return countNodes(tree->left) + countNodes(tree->right);
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 template <class myType>
 void preorder(binaryTreeNode<myType> *root)
 {
@@ -47,6 +49,7 @@ void preorder(binaryTreeNode<myType> *root)
     preorder(root->right);
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 template <class myType>
 void postorder(binaryTreeNode<myType> *root)
 {
@@ -58,6 +61,7 @@ void postorder(binaryTreeNode<myType> *root)
     cout << root->item << endl;
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 template <class myType>
 int countLeaves(binaryTreeNode<myType> *root)
 {
@@ -68,6 +72,7 @@ int countLeaves(binaryTreeNode<myType> *root)
         return countLeaves(root->left) + countLeaves(root->right);
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 template <class myType>
 int countNonLeafNodes(binaryTreeNode<myType> *root)
 {
@@ -77,6 +82,7 @@ int countNonLeafNodes(binaryTreeNode<myType> *root)
     return countNonLeafNodes(root->left) + countNonLeadNodes(root->right);
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 template <class myType>
 int oneChild(binaryTreeNode<myType> *root)
 {
@@ -92,6 +98,7 @@ int oneChild(binaryTreeNode<myType> *root)
     return oneChild(root->left) + oneChild(root->right);
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 template <class myType>
 int determineHeight(binaryTreeNode<myType> *root)
 {
@@ -108,4 +115,47 @@ if (root != NULL)
     }
  
     return 0;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void printTree(binTreeNode* root)
+{
+    myQueue<binTreeNode*> queue;
+    queue.enqueue(root);
+    while (!queue.isEmpty())
+    {
+        binTreeNode* curr = queue.peek();
+        queue.dequeue();
+        cout << curr->id << " ";
+        if (curr->left != NULL)
+            queue.enqueue(curr->left);
+        if (curr->right != NULL)
+            queue.enqueue(curr->right);
+    }
+    cout << endl;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void recPrintTree(binTreeNode* root)
+{
+    if (root == NULL)
+        return;
+    
+    recPrintTree(root->left);
+    recPrintTree(root->right);
+        cout << root->id << " ";
+
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+int sumOfLeftLeaves(binTreeNode* root) {
+    if (root == NULL)
+        return 0;
+    
+    // determining if it is a left leaf
+    if (root->left && !root->left->right && !root->left->left)
+        return root->left->val + sumOfLeftLeaves(root->right);
+    
+    // traverse the list
+    return sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right);
 }
